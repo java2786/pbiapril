@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Netflix Movies Power BI Dashboard - Project Preview</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap');
+
+  :root {
+    --red: #E50914;
+    --red-dim: #8B0000;
+    --gold: #F5A623;
+    --green: #21C55D;
+    --bg: #0D0D0D;
+    --surface: #141414;
+    --card: #1C1C1C;
+    --border: #2A2A2A;
+    --text: #E8E8E8;
+    --muted: #888;
+    --accent: #E50914;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ===== HEADER ===== */
+  .header {
+    background: linear-gradient(135deg, #0D0D0D 0%, #1a0000 50%, #0D0D0D 100%);
+    border-bottom: 2px solid var(--red);
+    padding: 20px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    top: -60px; left: -60px;
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(229,9,20,0.15) 0%, transparent 70%);
+  }
+  .header-left { display: flex; align-items: center; gap: 18px; }
+  .netflix-n {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 52px;
+    color: var(--red);
+    line-height: 1;
+    text-shadow: 0 0 30px rgba(229,9,20,0.5);
+    letter-spacing: -2px;
+  }
+  .header-titles { display: flex; flex-direction: column; gap: 2px; }
+  .header-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 26px;
+    letter-spacing: 3px;
+    color: #fff;
+  }
+  .header-sub {
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--red);
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  .header-right { display: flex; align-items: center; gap: 12px; }
+  .badge {
+    background: var(--red);
+    color: #fff;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    padding: 4px 10px;
+    border-radius: 2px;
+    text-transform: uppercase;
+  }
+  .badge.outline {
+    background: transparent;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+  }
+
+  /* ===== NAV TABS ===== */
+  .nav-tabs {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    gap: 0;
+    padding: 0 32px;
+    overflow-x: auto;
+  }
+  .nav-tab {
+    padding: 12px 20px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    color: var(--muted);
+    white-space: nowrap;
+    transition: all 0.2s;
+  }
+  .nav-tab.active { color: var(--red); border-bottom-color: var(--red); }
+  .nav-tab:hover { color: #ccc; }
+
+  /* ===== MAIN LAYOUT ===== */
+  .dashboard { padding: 24px 32px; display: flex; flex-direction: column; gap: 20px; }
+
+  /* ===== KPI ROW ===== */
+  .kpi-row { display: grid; grid-template-columns: repeat(6, 1fr); gap: 14px; }
+
+  .kpi-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 18px 16px;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+  .kpi-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+  }
+  .kpi-card.red::before { background: var(--red); }
+  .kpi-card.gold::before { background: var(--gold); }
+  .kpi-card.green::before { background: var(--green); }
+  .kpi-card.blue::before { background: #3B82F6; }
+  .kpi-card.purple::before { background: #A855F7; }
+  .kpi-card.teal::before { background: #14B8A6; }
+
+  .kpi-label {
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+  .kpi-value {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 36px;
+    line-height: 1;
+    letter-spacing: 1px;
+  }
+  .kpi-card.red .kpi-value { color: var(--red); }
+  .kpi-card.gold .kpi-value { color: var(--gold); }
+  .kpi-card.green .kpi-value { color: var(--green); }
+  .kpi-card.blue .kpi-value { color: #60A5FA; }
+  .kpi-card.purple .kpi-value { color: #C084FC; }
+  .kpi-card.teal .kpi-value { color: #2DD4BF; }
+
+  .kpi-delta {
+    font-size: 10px;
+    margin-top: 6px;
+    color: var(--green);
+    font-weight: 600;
+  }
+  .kpi-delta.down { color: #F87171; }
+
+  /* ===== MIDDLE ROW ===== */
+  .mid-row { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 14px; }
+
+  /* ===== CHART CARD ===== */
+  .chart-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .chart-title {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 700;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 10px;
+  }
+
+  /* ===== BAR CHART ===== */
+  .bar-list { display: flex; flex-direction: column; gap: 8px; }
+  .bar-item { display: flex; align-items: center; gap: 10px; }
+  .bar-label { font-size: 10px; color: var(--text); width: 180px; flex-shrink: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .bar-track { flex: 1; height: 8px; background: rgba(255,255,255,0.05); border-radius: 2px; overflow: hidden; }
+  .bar-fill { height: 100%; border-radius: 2px; }
+  .bar-val { font-family: 'DM Mono', monospace; font-size: 9px; color: var(--muted); width: 36px; text-align: right; }
+
+  /* ===== DONUT CHART ===== */
+  .donut-wrap { display: flex; flex-direction: column; align-items: center; gap: 14px; }
+  .donut-svg { width: 120px; height: 120px; }
+  .donut-legend { display: flex; flex-direction: column; gap: 6px; width: 100%; }
+  .legend-item { display: flex; align-items: center; gap: 8px; font-size: 10px; }
+  .legend-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+  .legend-label { color: var(--muted); flex: 1; }
+  .legend-val { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--text); font-weight: 500; }
+
+  /* ===== SLICERS ===== */
+  .slicer-group { display: flex; flex-direction: column; gap: 6px; }
+  .slicer-title { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); font-weight: 700; margin-bottom: 4px; }
+  .slicer-options { display: flex; flex-wrap: wrap; gap: 5px; }
+  .slicer-btn {
+    padding: 4px 10px;
+    border-radius: 3px;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    border: 1px solid var(--border);
+    cursor: pointer;
+    color: var(--muted);
+    background: transparent;
+  }
+  .slicer-btn.active { background: var(--red); border-color: var(--red); color: #fff; }
+
+  /* ===== BOTTOM ROW ===== */
+  .bottom-row { display: grid; grid-template-columns: 1.2fr 1fr 1.3fr; gap: 14px; }
+
+  /* ===== SCATTER ===== */
+  .scatter-wrap { position: relative; width: 100%; height: 170px; }
+  .scatter-axis-x {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    height: 1px; background: var(--border);
+  }
+  .scatter-axis-y {
+    position: absolute; top: 0; bottom: 0; left: 0;
+    width: 1px; background: var(--border);
+  }
+  .scatter-label-x { position: absolute; bottom: -16px; right: 0; font-size: 8px; color: var(--muted); letter-spacing: 1px; }
+  .scatter-label-y { position: absolute; top: 0; left: 4px; font-size: 8px; color: var(--muted); letter-spacing: 1px; }
+  .s-dot {
+    position: absolute;
+    border-radius: 50%;
+    transform: translate(-50%, 50%);
+    opacity: 0.85;
+    cursor: pointer;
+    transition: opacity 0.2s;
+  }
+  .s-dot:hover { opacity: 1; }
+
+  /* ===== LINE CHART ===== */
+  .line-wrap { position: relative; width: 100%; height: 130px; }
+  .line-wrap svg { width: 100%; height: 100%; overflow: visible; }
+
+  /* ===== STACKED BAR ===== */
+  .stacked-row { display: flex; flex-direction: column; gap: 7px; }
+  .stacked-item { display: flex; align-items: center; gap: 8px; }
+  .stacked-label { font-size: 9px; color: var(--muted); width: 55px; flex-shrink: 0; }
+  .stacked-bars { display: flex; flex: 1; height: 14px; border-radius: 2px; overflow: hidden; gap: 1px; }
+  .stacked-seg { height: 100%; }
+
+  /* ===== MAP VISUAL ===== */
+  .map-visual { position: relative; overflow: hidden; border-radius: 4px; background: #0a1628; height: 160px; }
+  .map-grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
+  .map-bubble {
+    position: absolute;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 8px;
+    font-weight: 700;
+    color: #fff;
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
+  .map-bubble:hover { transform: translate(-50%,-50%) scale(1.15); }
+  .map-label-bubble { position: absolute; font-size: 7px; color: rgba(255,255,255,0.5); letter-spacing: 1px; }
+
+  /* ===== TREEMAP ===== */
+  .treemap { display: grid; gap: 2px; height: 160px; grid-template-columns: 3fr 2fr 1.5fr; }
+  .treemap-col { display: flex; flex-direction: column; gap: 2px; }
+  .treemap-cell {
+    border-radius: 3px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 6px;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition: opacity 0.2s;
+  }
+  .treemap-cell:hover { opacity: 0.85; }
+  .treemap-name { font-size: 9px; font-weight: 700; color: rgba(255,255,255,0.9); }
+  .treemap-count { font-family: 'DM Mono', monospace; font-size: 8px; color: rgba(255,255,255,0.5); margin-top: 1px; }
+
+  /* ===== BOTTOM INFO STRIP ===== */
+  .info-strip {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 14px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .info-item { display: flex; align-items: center; gap: 8px; }
+  .info-dot { width: 6px; height: 6px; border-radius: 50%; }
+  .info-text { font-size: 10px; color: var(--muted); }
+  .info-text strong { color: var(--text); font-weight: 600; }
+
+  /* ===== PAGE INDICATOR ===== */
+  .page-dots { display: flex; gap: 6px; align-items: center; }
+  .page-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--border); }
+  .page-dot.active { background: var(--red); width: 20px; border-radius: 3px; }
+
+  /* ===== WATERMARK ===== */
+  .project-label {
+    text-align: center;
+    padding: 14px;
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #333;
+    border-top: 1px solid #1a1a1a;
+  }
+  .project-label span { color: var(--red); }
+
+  /* ===== TOOLTIP STYLE ===== */
+  .tooltip-pill {
+    background: #2a2a2a;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 6px 10px;
+    font-size: 9px;
+    color: var(--text);
+    pointer-events: none;
+    white-space: nowrap;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+  }
+  .tooltip-pill strong { color: var(--gold); display: block; margin-bottom: 2px; }
+
+  /* Animations */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .kpi-card { animation: fadeUp 0.4s ease both; }
+  .kpi-card:nth-child(1) { animation-delay: 0.05s; }
+  .kpi-card:nth-child(2) { animation-delay: 0.10s; }
+  .kpi-card:nth-child(3) { animation-delay: 0.15s; }
+  .kpi-card:nth-child(4) { animation-delay: 0.20s; }
+  .kpi-card:nth-child(5) { animation-delay: 0.25s; }
+  .kpi-card:nth-child(6) { animation-delay: 0.30s; }
+  .chart-card { animation: fadeUp 0.5s ease both; animation-delay: 0.3s; }
+
+  .bar-fill { transition: width 1s cubic-bezier(0.4,0,0.2,1); }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-left">
+    <div class="netflix-n">N</div>
+    <div class="header-titles">
+      <div class="header-title">Netflix Movies Analytics</div>
+      <div class="header-sub">Power BI Resume Project &nbsp;|&nbsp; ETL &bull; DAX &bull; Dashboard</div>
+    </div>
+  </div>
+  <div class="header-right">
+    <div class="badge">Page 1 of 5</div>
+    <div class="badge outline">Overview</div>
+    <div class="page-dots">
+      <div class="page-dot active"></div>
+      <div class="page-dot"></div>
+      <div class="page-dot"></div>
+      <div class="page-dot"></div>
+      <div class="page-dot"></div>
+    </div>
+  </div>
+</div>
+
+<!-- NAV TABS -->
+<div class="nav-tabs">
+  <div class="nav-tab active">Overview</div>
+  <div class="nav-tab">Genre Analysis</div>
+  <div class="nav-tab">Country & Language</div>
+  <div class="nav-tab">Financial Performance</div>
+  <div class="nav-tab">Trends by Year</div>
+</div>
+
+<!-- DASHBOARD -->
+<div class="dashboard">
+
+  <!-- KPI ROW -->
+  <div class="kpi-row">
+    <div class="kpi-card red">
+      <div class="kpi-label">Total Movies</div>
+      <div class="kpi-value">93</div>
+      <div class="kpi-delta">After deduplication</div>
+    </div>
+    <div class="kpi-card gold">
+      <div class="kpi-label">Avg IMDb Rating</div>
+      <div class="kpi-value">8.1</div>
+      <div class="kpi-delta">Scale 0 - 10</div>
+    </div>
+    <div class="kpi-card green">
+      <div class="kpi-label">Box Office (USD)</div>
+      <div class="kpi-value">$68.4B</div>
+      <div class="kpi-delta">Total worldwide</div>
+    </div>
+    <div class="kpi-card blue">
+      <div class="kpi-label">Hit Percentage</div>
+      <div class="kpi-value">62%</div>
+      <div class="kpi-delta">ROI &ge; 100%</div>
+    </div>
+    <div class="kpi-card purple">
+      <div class="kpi-label">Indian Movies</div>
+      <div class="kpi-value">47</div>
+      <div class="kpi-delta">50.5% of dataset</div>
+    </div>
+    <div class="kpi-card teal">
+      <div class="kpi-label">Awards Won</div>
+      <div class="kpi-value">214</div>
+      <div class="kpi-delta">Across all films</div>
+    </div>
+  </div>
+
+  <!-- MIDDLE ROW -->
+  <div class="mid-row">
+
+    <!-- TOP 10 BAR CHART -->
+    <div class="chart-card">
+      <div class="chart-title">Top 10 Movies by Box Office Collection (USD)</div>
+      <div class="bar-list">
+        <div class="bar-item">
+          <div class="bar-label">Baahubali 2: The Conclusion</div>
+          <div class="bar-track"><div class="bar-fill" style="width:100%;background:linear-gradient(90deg,#E50914,#FF6B6B)"></div></div>
+          <div class="bar-val">18.1B</div>
+        </div>
+        <div class="bar-item">
+          <div class="bar-label">Avengers: Endgame</div>
+          <div class="bar-track"><div class="bar-fill" style="width:92%;background:linear-gradient(90deg,#E50914,#FF6B6B)"></div></div>
+          <div class="bar-val">2.8B</div>
+        </div>
+        <div class="bar-item">
+          <div class="bar-label">Spider-Man: No Way Home</div>
+          <div class="bar-track"><div class="bar-fill" style="width:62%;background:linear-gradient(90deg,#3B82F6,#60A5FA)"></div></div>
+          <div class="bar-val">1.9B</div>
+        </div>
+        <div class="bar-item">
+          <div class="bar-label">Avengers: Infinity War</div>
+          <div class="bar-track"><div class="bar-fill" style="width:67%;background:linear-gradient(90deg,#3B82F6,#60A5FA)"></div></div>
+          <div class="bar-val">2.0B</div>
+        </div>
+        <div class="bar-item">
+          <div class="bar-label">The Lion King (2019)</div>
+          <div class="bar-track"><div class="bar-fill" style="width:54%;background:linear-gradient(90deg,#F5A623,#FCD34D)"></div></div>
+          <div class="bar-val">1.7B</div>
+        </div>
+        <div class="bar-item">
+          <div class="bar-label">KGF Chapter 2</div>
+          <div class="bar-track"><div class="bar-fill" style="width:41%;background:linear-gradient(90deg,#E50914,#FF6B6B)"></div></div>
+          <div class="bar-val">1.25B</div>
+        </div>
+        <div class="bar-item">
+          <div class="bar-label">RRR</div>
+          <div class="bar-track"><div class="bar-fill" style="width:39%;background:linear-gradient(90deg,#E50914,#FF6B6B)"></div></div>
+          <div class="bar-val">1.2B</div>
+        </div>
+        <div class="bar-item">
+          <div class="bar-label">Black Panther</div>
+          <div class="bar-track"><div class="bar-fill" style="width:44%;background:linear-gradient(90deg,#A855F7,#C084FC)"></div></div>
+          <div class="bar-val">1.35B</div>
+        </div>
+        <div class="bar-item">
+          <div class="bar-label">Joker</div>
+          <div class="bar-track"><div class="bar-fill" style="width:35%;background:linear-gradient(90deg,#A855F7,#C084FC)"></div></div>
+          <div class="bar-val">1.08B</div>
+        </div>
+        <div class="bar-item">
+          <div class="bar-label">PK</div>
+          <div class="bar-track"><div class="bar-fill" style="width:28%;background:linear-gradient(90deg,#E50914,#FF6B6B)"></div></div>
+          <div class="bar-val">853M</div>
+        </div>
+      </div>
+      <div style="display:flex;gap:12px;margin-top:4px">
+        <div class="legend-item"><div class="legend-dot" style="background:#E50914"></div><div class="legend-label">Indian Cinema</div></div>
+        <div class="legend-item"><div class="legend-dot" style="background:#3B82F6"></div><div class="legend-label">Hollywood</div></div>
+        <div class="legend-item"><div class="legend-dot" style="background:#A855F7"></div><div class="legend-label">Other International</div></div>
+      </div>
+    </div>
+
+    <!-- DONUT CHART -->
+    <div class="chart-card">
+      <div class="chart-title">Hit vs Flop Distribution</div>
+      <div class="donut-wrap">
+        <svg class="donut-svg" viewBox="0 0 120 120">
+          <circle cx="60" cy="60" r="46" fill="none" stroke="#1c1c1c" stroke-width="18"/>
+          <!-- HIT: 62% = 289.6deg of 469.6 circumference = 289.6 -->
+          <circle cx="60" cy="60" r="46" fill="none" stroke="#21C55D" stroke-width="18"
+            stroke-dasharray="180 289.6" stroke-dashoffset="0"
+            transform="rotate(-90 60 60)"/>
+          <!-- FLOP: 28% -->
+          <circle cx="60" cy="60" r="46" fill="none" stroke="#F87171" stroke-width="18"
+            stroke-dasharray="82 387"
+            transform="rotate(-90 60 60)" stroke-dashoffset="-180"/>
+          <!-- Unknown: 10% -->
+          <circle cx="60" cy="60" r="46" fill="none" stroke="#444" stroke-width="18"
+            stroke-dasharray="29 440"
+            transform="rotate(-90 60 60)" stroke-dashoffset="-262"/>
+          <text x="60" y="56" text-anchor="middle" fill="#E8E8E8" font-family="Bebas Neue,sans-serif" font-size="20">62%</text>
+          <text x="60" y="68" text-anchor="middle" fill="#888" font-family="DM Sans,sans-serif" font-size="7" letter-spacing="1">HIT RATE</text>
+        </svg>
+        <div class="donut-legend">
+          <div class="legend-item">
+            <div class="legend-dot" style="background:#21C55D"></div>
+            <div class="legend-label">HIT (ROI &ge; 100%)</div>
+            <div class="legend-val">58 films</div>
+          </div>
+          <div class="legend-item">
+            <div class="legend-dot" style="background:#F87171"></div>
+            <div class="legend-label">FLOP</div>
+            <div class="legend-val">26 films</div>
+          </div>
+          <div class="legend-item">
+            <div class="legend-dot" style="background:#444"></div>
+            <div class="legend-label">Unknown (No Data)</div>
+            <div class="legend-val">9 films</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLICERS CARD -->
+    <div class="chart-card">
+      <div class="chart-title">Interactive Slicers</div>
+      <div style="display:flex;flex-direction:column;gap:16px;">
+        <div class="slicer-group">
+          <div class="slicer-title">Country</div>
+          <div class="slicer-options">
+            <div class="slicer-btn active">All</div>
+            <div class="slicer-btn">India</div>
+            <div class="slicer-btn">USA</div>
+            <div class="slicer-btn">UK</div>
+            <div class="slicer-btn">South Korea</div>
+            <div class="slicer-btn">Australia</div>
+          </div>
+        </div>
+        <div class="slicer-group">
+          <div class="slicer-title">Decade</div>
+          <div class="slicer-options">
+            <div class="slicer-btn active">All</div>
+            <div class="slicer-btn">Before 1990s</div>
+            <div class="slicer-btn">1990s</div>
+            <div class="slicer-btn">2000s</div>
+            <div class="slicer-btn">2010s</div>
+            <div class="slicer-btn">2020s</div>
+          </div>
+        </div>
+        <div class="slicer-group">
+          <div class="slicer-title">Budget Category</div>
+          <div class="slicer-options">
+            <div class="slicer-btn active">All</div>
+            <div class="slicer-btn">Blockbuster</div>
+            <div class="slicer-btn">High Budget</div>
+            <div class="slicer-btn">Mid Budget</div>
+            <div class="slicer-btn">Low Budget</div>
+          </div>
+        </div>
+        <div class="slicer-group">
+          <div class="slicer-title">IMDb Category</div>
+          <div class="slicer-options">
+            <div class="slicer-btn active">All</div>
+            <div class="slicer-btn">Must Watch</div>
+            <div class="slicer-btn">Highly Rated</div>
+            <div class="slicer-btn">Average</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BOTTOM ROW -->
+  <div class="bottom-row">
+
+    <!-- SCATTER CHART -->
+    <div class="chart-card">
+      <div class="chart-title">Budget vs Box Office Correlation (Scatter)</div>
+      <div class="scatter-wrap" style="height:160px;">
+        <div class="scatter-axis-x"></div>
+        <div class="scatter-axis-y"></div>
+        <div class="scatter-label-x">Budget (USD)</div>
+        <div class="scatter-label-y">Revenue</div>
+        <!-- Diagonal reference line -->
+        <svg style="position:absolute;inset:0;width:100%;height:100%;overflow:visible;">
+          <line x1="0%" y1="100%" x2="100%" y2="0%" stroke="rgba(255,255,255,0.06)" stroke-width="1" stroke-dasharray="4"/>
+          <!-- Scatter dots -->
+          <!-- HIT dots (green) -->
+          <circle cx="8%" cy="5%" r="12" fill="#21C55D" opacity="0.8"/>
+          <circle cx="22%" cy="18%" r="9" fill="#21C55D" opacity="0.7"/>
+          <circle cx="35%" cy="22%" r="7" fill="#21C55D" opacity="0.8"/>
+          <circle cx="45%" cy="28%" r="8" fill="#21C55D" opacity="0.7"/>
+          <circle cx="18%" cy="35%" r="6" fill="#21C55D" opacity="0.8"/>
+          <circle cx="55%" cy="40%" r="6" fill="#21C55D" opacity="0.7"/>
+          <circle cx="28%" cy="50%" r="7" fill="#21C55D" opacity="0.8"/>
+          <circle cx="65%" cy="30%" r="5" fill="#21C55D" opacity="0.7"/>
+          <circle cx="40%" cy="60%" r="5" fill="#21C55D" opacity="0.8"/>
+          <circle cx="75%" cy="45%" r="6" fill="#21C55D" opacity="0.7"/>
+          <!-- FLOP dots (red) -->
+          <circle cx="60%" cy="70%" r="8" fill="#F87171" opacity="0.8"/>
+          <circle cx="70%" cy="78%" r="6" fill="#F87171" opacity="0.7"/>
+          <circle cx="80%" cy="72%" r="5" fill="#F87171" opacity="0.8"/>
+          <circle cx="50%" cy="80%" r="7" fill="#F87171" opacity="0.7"/>
+          <circle cx="85%" cy="85%" r="5" fill="#F87171" opacity="0.8"/>
+          <circle cx="90%" cy="75%" r="6" fill="#F87171" opacity="0.7"/>
+          <!-- Unknown -->
+          <circle cx="42%" cy="42%" r="5" fill="#666" opacity="0.6"/>
+          <circle cx="30%" cy="70%" r="4" fill="#666" opacity="0.6"/>
+        </svg>
+      </div>
+      <div style="display:flex;gap:14px;margin-top:4px">
+        <div class="legend-item"><div class="legend-dot" style="background:#21C55D"></div><div class="legend-label">HIT (Above break-even line)</div></div>
+        <div class="legend-item"><div class="legend-dot" style="background:#F87171"></div><div class="legend-label">FLOP</div></div>
+      </div>
+    </div>
+
+    <!-- LINE CHART: IMDb Trend -->
+    <div class="chart-card">
+      <div class="chart-title">Average IMDb Rating by Year (Line Chart)</div>
+      <div class="line-wrap">
+        <svg viewBox="0 0 280 110" preserveAspectRatio="none" style="width:100%;height:100%;">
+          <!-- Grid lines -->
+          <line x1="0" y1="90" x2="280" y2="90" stroke="#2a2a2a" stroke-width="0.5"/>
+          <line x1="0" y1="60" x2="280" y2="60" stroke="#2a2a2a" stroke-width="0.5"/>
+          <line x1="0" y1="30" x2="280" y2="30" stroke="#2a2a2a" stroke-width="0.5"/>
+          <!-- Area fill -->
+          <defs>
+            <linearGradient id="lineGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#E50914" stop-opacity="0.3"/>
+              <stop offset="100%" stop-color="#E50914" stop-opacity="0"/>
+            </linearGradient>
+          </defs>
+          <path d="M10,80 L45,70 L80,65 L110,60 L140,55 L170,58 L200,45 L230,40 L260,50 L280,48 L280,90 L10,90 Z"
+            fill="url(#lineGrad)"/>
+          <!-- Line -->
+          <path d="M10,80 L45,70 L80,65 L110,60 L140,55 L170,58 L200,45 L230,40 L260,50 L280,48"
+            fill="none" stroke="#E50914" stroke-width="2" stroke-linejoin="round"/>
+          <!-- Dots -->
+          <circle cx="10" cy="80" r="3" fill="#E50914"/>
+          <circle cx="80" cy="65" r="3" fill="#E50914"/>
+          <circle cx="140" cy="55" r="3" fill="#E50914"/>
+          <circle cx="200" cy="45" r="3" fill="#E50914"/>
+          <circle cx="260" cy="50" r="3" fill="#E50914"/>
+          <!-- X labels -->
+          <text x="10" y="105" fill="#555" font-size="7" text-anchor="middle">1972</text>
+          <text x="80" y="105" fill="#555" font-size="7" text-anchor="middle">1999</text>
+          <text x="140" y="105" fill="#555" font-size="7" text-anchor="middle">2007</text>
+          <text x="200" y="105" fill="#555" font-size="7" text-anchor="middle">2015</text>
+          <text x="260" y="105" fill="#555" font-size="7" text-anchor="middle">2022</text>
+          <!-- Y labels -->
+          <text x="-2" y="93" fill="#555" font-size="7" text-anchor="end">6.5</text>
+          <text x="-2" y="63" fill="#555" font-size="7" text-anchor="end">7.5</text>
+          <text x="-2" y="33" fill="#555" font-size="7" text-anchor="end">8.5</text>
+          <!-- Trend annotation -->
+          <text x="230" y="35" fill="#F5A623" font-size="7">Peak: 9.3</text>
+          <text x="220" y="43" fill="#F5A623" font-size="6">Shawshank</text>
+        </svg>
+      </div>
+      <div style="margin-top:4px;font-size:9px;color:var(--muted)">Trend line shows quality remains consistently high 7.5-8.5+</div>
+    </div>
+
+    <!-- TREEMAP: Category -->
+    <div class="chart-card">
+      <div class="chart-title">Movies by Genre (Treemap)</div>
+      <div class="treemap">
+        <div class="treemap-col">
+          <div class="treemap-cell" style="background:#7f0000;flex:3;">
+            <div class="treemap-name">Action</div>
+            <div class="treemap-count">32 movies</div>
+          </div>
+          <div class="treemap-cell" style="background:#1a237e;flex:2;">
+            <div class="treemap-name">Drama</div>
+            <div class="treemap-count">24 movies</div>
+          </div>
+        </div>
+        <div class="treemap-col">
+          <div class="treemap-cell" style="background:#1b5e20;flex:2;">
+            <div class="treemap-name">Comedy</div>
+            <div class="treemap-count">12 movies</div>
+          </div>
+          <div class="treemap-cell" style="background:#0d47a1;flex:1.5;">
+            <div class="treemap-name">Sci-Fi</div>
+            <div class="treemap-count">11 movies</div>
+          </div>
+          <div class="treemap-cell" style="background:#4a148c;flex:1;">
+            <div class="treemap-name">Thriller</div>
+            <div class="treemap-count">6 movies</div>
+          </div>
+        </div>
+        <div class="treemap-col">
+          <div class="treemap-cell" style="background:#e65100;flex:1;">
+            <div class="treemap-name">Crime</div>
+            <div class="treemap-count">4</div>
+          </div>
+          <div class="treemap-cell" style="background:#880e4f;flex:1;">
+            <div class="treemap-name">Romance</div>
+            <div class="treemap-count">3</div>
+          </div>
+          <div class="treemap-cell" style="background:#37474f;flex:1;">
+            <div class="treemap-name">Others</div>
+            <div class="treemap-count">3</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- INFO STRIP -->
+  <div class="info-strip">
+    <div class="info-item">
+      <div class="info-dot" style="background:#E50914"></div>
+      <div class="info-text"><strong>ETL:</strong> 12 Power Query steps applied to clean raw data</div>
+    </div>
+    <div class="info-item">
+      <div class="info-dot" style="background:#F5A623"></div>
+      <div class="info-text"><strong>Calculated Columns:</strong> Profit, ROI%, Hit/Flop, Budget Category, IMDb Category, Country Group</div>
+    </div>
+    <div class="info-item">
+      <div class="info-dot" style="background:#21C55D"></div>
+      <div class="info-text"><strong>DAX Measures:</strong> 10 measures using CALCULATE, VAR, AVERAGEX, DIVIDE, FILTER</div>
+    </div>
+    <div class="info-item">
+      <div class="info-dot" style="background:#3B82F6"></div>
+      <div class="info-text"><strong>Dashboard:</strong> 5 pages &bull; Cross-filtering &bull; Page Navigation &bull; Mobile Layout</div>
+    </div>
+  </div>
+
+</div>
+
+<div class="project-label">
+  POWER BI RESUME PROJECT &nbsp;&bull;&nbsp; NETFLIX MOVIES ANALYTICS &nbsp;&bull;&nbsp; <span>DESIGNED FOR CLASSROOM TRAINING</span> &nbsp;&bull;&nbsp; 93 MOVIES &bull; 15 COLUMNS &bull; 5 DASHBOARD PAGES
+</div>
+
+</body>
+</html>
