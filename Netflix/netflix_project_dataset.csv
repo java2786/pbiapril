@@ -1,0 +1,101 @@
+MovieID,Name,Year,Category,IMDb,Rating,Duration,Language,Country,Budget_USD,Box_Office_USD,Director,Lead_Actor,Streaming_Months,Awards_Won
+1,Avengers: Endgame,2019,Action,8.4,UA,181 min,English,USA,356000000,2797800564,Anthony Russo,Robert Downey Jr.,36,12
+2,The Dark Knight,2008,action,9.0,UA,152 min,English,USA,185000000,1004558444,Christopher Nolan,Christian Bale,48,8
+3,Parasite,2019,Drama,8.5,A,132 min,Korean,South Korea,11400000,258773645,Bong Joon-ho,Song Kang-ho,24,4
+4,Baahubali: The Beginning,2015,Action,8.0,UA,159 min,Telugu,India,270000000,650000000,S. S. Rajamouli,Prabhas,60,6
+5,3 Idiots,2009,Comedy,8.4,UA,170 min,Hindi,India,55000000,460000000,Rajkumar Hirani,Aamir Khan,84,5
+6,,2018,Thriller,7.2,UA,118 min,English,UK,45000000,220000000,David Fincher,Brad Pitt,30,2
+7,Dangal,2016,Drama,8.3,UA,161 min,Hindi,India,70000000,330000000,Nitesh Tiwari,Aamir Khan,72,3
+8,Inception,2010,Sci-Fi,8.7,UA,148 min,English,USA,160000000,836836967,Christopher Nolan,Leonardo DiCaprio,60,4
+9,RRR,2022,Action,7.9,UA,182 min,Telugu,India,550000000,1200000000,S. S. Rajamouli,N. T. Rama Rao Jr.,18,3
+10,The Lion King,2019,Animation,6.9,U,118 min,English,USA,260000000,1663075401,Jon Favreau,Donald Glover,36,1
+11,Spider-Man: No Way Home,2021,Action,8.3,UA,148 min,English,USA,200000000,1901216653,Jon Watts,Tom Holland,24,5
+12,Joker,2019,Drama,8.4,A,122 min,English,USA,55000000,1079000000,Todd Phillips,Joaquin Phoenix,36,11
+13,KGF Chapter 2,2022,Action,8.2,A,168 min,Kannada,India,1000000000,1250000000,Prashanth Neel,Yash,18,2
+14,Chhichhore,2019,Comedy,8.2,UA,143 min,Hindi,India,120000000,200000000,Nitesh Tiwari,Sushant Singh Rajput,36,4
+15,Interstellar,2014,Sci-Fi,8.6,UA,169 min,English,USA,165000000,773342781,Christopher Nolan,Matthew McConaughey,60,1
+16,Zindagi Na Milegi Dobara,2011,Drama,8.1,UA,153 min,Hindi,India,350000000,1530000000,Zoya Akhtar,Hrithik Roshan,72,6
+17,Frozen II,2019,Animation,6.8,U,103 min,English,USA,150000000,1450026933,Chris Buck,Idina Menzel,36,2
+18,Avengers Infinity War,2018,Action,8.4,UA,149 min,English,USA,321000000,2048359754,Anthony Russo,Robert Downey Jr.,36,7
+19,Uri: The Surgical Strike,2019,Action,8.2,UA,138 min,Hindi,India,250000000,342160000,Aditya Dhar,Vicky Kaushal,36,3
+20,Forrest Gump,1994,Drama,8.8,UA,142 min,English,USA,55000000,678151979,Robert Zemeckis,Tom Hanks,120,6
+21,Shershaah,2021,Action,8.4,UA,135 min,Hindi,India,500000000,,Vishnuvardhan,Sidharth Malhotra,24,4
+22,The Shawshank Redemption,1994,Drama,9.3,A,142 min,English,USA,25000000,16000000,Frank Darabont,Tim Robbins,120,7
+23,Pushpa: The Rise,2021,Action,7.6,A,179 min,Telugu,India,200000000,365000000,Sukumar,Allu Arjun,24,2
+24,Dil Chahta Hai,2001,Comedy,8.1,UA,183 min,Hindi,India,120000000,500000000,Farhan Akhtar,Aamir Khan,120,3
+25,Jaws,1975,Thriller,8.0,A,124 min,English,USA,9000000,476581600,Steven Spielberg,Roy Scheider,N/A,4
+26,War,2019,Action,5.0,UA,154 min,Hindi,India,1500000000,2090000000,Siddharth Anand,Hrithik Roshan,36,1
+27,Toy Story 4,2019,Animation,7.7,U,100 min,English,USA,200000000,1073394593,Josh Cooley,Tom Hanks,36,2
+28,Kabir Singh,2019,Romance,7.1,A,173 min,Hindi,India,600000000,3780000000,Sandeep Reddy Vanga,Shahid Kapoor,36,1
+29,The Godfather,1972,Crime,9.2,A,175 min,English,USA,6000000,245066411,Francis Ford Coppola,Marlon Brando,120,5
+30,Mission: Impossible,2018,Action,7.7,UA,147 min,English,USA,178000000,791115104,Christopher McQuarrie,Tom Cruise,36,3
+31,Mughal-E-Azam,1960,Drama,8.2,U,197 min,Hindi,India,15000000,110000000,K. Asif,Dilip Kumar,N/A,2
+32,Black Panther,2018,Action,7.3,UA,134 min,English,USA,200000000,1346913161,Ryan Coogler,Chadwick Boseman,36,1
+33,Sholay,1975,Action,8.2,UA,204 min,Hindi,India,15000000,250000000,Ramesh Sippy,Amitabh Bachchan,N/A,5
+34,Thor: Ragnarok,2017,Action,7.9,UA,130 min,English,USA,180000000,853977126,Taika Waititi,Chris Hemsworth,48,3
+35,Dilwale Dulhania Le Jayenge,1995,Romance,8.1,U,189 min,Hindi,India,40000000,1340000000,Aditya Chopra,Shah Rukh Khan,N/A,10
+36,Captain America: Civil War,2016,Action,7.8,UA,147 min,English,USA,250000000,1153336161,Anthony Russo,Chris Evans,48,2
+37,Bahubali 2 The Conclusion,2017,Action,8.2,UA,167 min,Telugu,India,2500000000,18100000000,S. S. Rajamouli,Prabhas,48,8
+38,Jurassic World,2015,Sci-Fi,6.9,UA,124 min,English,USA,150000000,1671713208,Colin Trevorrow,Chris Pratt,48,2
+39,Gully Boy,2019,Drama,7.9,UA,154 min,Hindi,India,350000000,430000000,Zoya Akhtar,Ranveer Singh,36,4
+40,Doctor Strange,2016,Sci-Fi,7.5,UA,115 min,English,USA,165000000,677718395,Scott Derrickson,Benedict Cumberbatch,48,1
+41,Taare Zameen Par,2007,Drama,8.4,U,162 min,Hindi,India,100000000,440000000,Aamir Khan,Darsheel Safary,72,2
+42,Pirates of the Caribbean,2003,Action,8.0,UA,143 min,English,USA,140000000,654264015,Gore Verbinski,Johnny Depp,N/A,5
+43,Lagaan,2001,Drama,8.1,U,224 min,Hindi,India,250000000,650000000,Ashutosh Gowariker,Aamir Khan,120,7
+44,Dune,2021,Sci-Fi,8.0,UA,155 min,English,USA,165000000,400671841,Denis Villeneuve,Timothee Chalamet,24,3
+45,PK,2014,Comedy,8.1,UA,153 min,Hindi,India,850000000,8530000000,Rajkumar Hirani,Aamir Khan,60,2
+46,Star Wars: The Force Awakens,2015,Sci-Fi,7.8,U,135 min,English,USA,245000000,2068223624,J.J. Abrams,Daisy Ridley,48,3
+47,Hera Pheri,2000,Comedy,8.2,UA,156 min,Hindi,India,60000000,480000000,Priyadarshan,Akshay Kumar,N/A,1
+48,Avengers: Endgame,2019,Action,8.4,UA,181 min,English,USA,356000000,2797800564,Anthony Russo,Robert Downey Jr.,36,12
+49,Jab We Met,2007,Romance,7.9,U,138 min,Hindi,India,150000000,610000000,Imtiaz Ali,Shahid Kapoor,72,3
+50,No Country for Old Men,2007,Crime,8.1,A,122 min,English,USA,25000000,171627166,Joel Coen,Tommy Lee Jones,60,4
+51,Schindler's List,1993,Drama,9.0,A,195 min,English,USA,22000000,322125058,Steven Spielberg,Liam Neeson,120,12
+52,Tumbbad,2018,Horror,8.2,A,104 min,Hindi,India,150000000,134000000,Rahi Anil Barve,Sohum Shah,36,2
+53,Gravity,2013,Sci-Fi,7.7,UA,91 min,English,USA,100000000,716392705,Alfonso Cuaron,Sandra Bullock,60,7
+54,Sultan,2016,Action,7.0,UA,170 min,Hindi,India,900000000,6230000000,Ali Abbas Zafar,Salman Khan,48,2
+55,Mad Max: Fury Road,2015,Action,8.1,R,120 min,English,Australia,185000000,375436237,George Miller,Tom Hardy,48,6
+56,Queen,2014,Drama,8.2,UA,146 min,Hindi,India,120000000,530000000,Vikas Bahl,Kangana Ranaut,60,4
+57,Blade Runner 2049,2017,Sci-Fi,8.0,A,164 min,English,USA,150000000,259239658,Denis Villeneuve,Ryan Gosling,48,1
+58,Andhadhun,2018,Thriller,8.3,A,139 min,Hindi,India,300000000,760000000,Sriram Raghavan,Ayushmann Khurrana,36,5
+59,Avenger: Infinity War,2018,Action,8.4,UA,149 min,English,USA,321000000,2048359754,Anthony Russo,Robert Downey Jr.,36,7
+60,DDLJ,1995,Romance,8.1,U,189 min,Hindi,India,40000000,1340000000,Aditya Chopra,Shah Rukh Khan,N/A,10
+61,Tanhaji,2020,Action,7.7,UA,135 min,Hindi,India,1500000000,3000000000,Om Raut,Ajay Devgn,36,2
+62,Whiplash,2014,Drama,8.5,A,107 min,English,USA,3300000,49000000,Damien Chazelle,Miles Teller,60,5
+63,Gangs of Wasseypur,2012,Crime,8.2,A,161 min,Hindi,India,50000000,182000000,Anurag Kashyap,Manoj Bajpayee,72,3
+64,The Matrix,1999,Sci-Fi,8.7,R,136 min,English,USA,63000000,467222728,Wachowski Sisters,Keanu Reeves,N/A,4
+65,Welcome,2007,Comedy,7.0,UA,143 min,Hindi,India,400000000,1130000000,Anees Bazmee,Akshay Kumar,72,1
+66,Everything Everywhere All at Once,2022,Sci-Fi,7.8,R,139 min,English,USA,14300000,69500000,Daniel Kwan,Michelle Yeoh,24,7
+67,Mission Mangal,2019,Drama,6.5,UA,130 min,Hindi,India,700000000,2890000000,Jagan Shakti,Akshay Kumar,36,1
+68,Braveheart,1995,Action,8.3,R,178 min,English,USA,72000000,213216216,Mel Gibson,Mel Gibson,N/A,5
+69,Article 15,2019,Drama,8.1,A,130 min,Hindi,India,400000000,760000000,Anubhav Sinha,Ayushmann Khurrana,36,4
+70,Get Out,2017,Horror,7.7,R,104 min,English,USA,4500000,255369816,Jordan Peele,Daniel Kaluuya,48,4
+71,Rocketry: The Nambi Effect,2022,Drama,8.5,UA,157 min,Hindi,India,N/A,N/A,R. Madhavan,R. Madhavan,18,3
+72,Fight Club,1999,Drama,8.8,R,139 min,English,USA,63000000,101200000,David Fincher,Brad Pitt,N/A,1
+73,Badhaai Ho,2018,Comedy,8.1,UA,123 min,Hindi,India,250000000,1370000000,Amit Sharma,Ayushmann Khurrana,36,3
+74,A Beautiful Mind,2001,Drama,8.2,PG-13,135 min,English,USA,58000000,313542341,Ron Howard,Russell Crowe,120,4
+75,Raazi,2018,Thriller,7.8,UA,138 min,Hindi,India,350000000,1960000000,Meghna Gulzar,Alia Bhatt,36,4
+76,Parasite,2019,Drama,8.5,A,132 min,Korean,South Korea,11400000,258773645,Bong Joon-ho,Song Kang-ho,24,4
+77,Karwaan,2018,Comedy,7.4,UA,114 min,Hindi,India,300000000,310000000,Akarsh Khurana,Irrfan Khan,36,1
+78,Drishyam,2015,Thriller,8.3,UA,163 min,Malayalam,India,120000000,1660000000,Jeethu Joseph,Mohanlal,60,4
+79,Inception,2010,Sci-Fi,8.7,UA,148 min,English,USA,160000000,836836967,Christopher Nolan,Leonardo DiCaprio,60,4
+80,Lunchbox,2013,Drama,7.8,U,104 min,Hindi,India,100000000,400000000,Ritesh Batra,Irrfan Khan,72,3
+81,Ready Player One,2018,Sci-Fi,7.4,PG-13,140 min,English,USA,175000000,582520023,Steven Spielberg,Tye Sheridan,36,2
+82,Bard of Blood,2019,Thriller,6.5,A,N/A,Hindi,India,N/A,N/A,Ribhu Dasgupta,Emraan Hashmi,24,0
+83,Piku,2015,Drama,7.9,U,122 min,Hindi,India,230000000,2200000000,Shoojit Sircar,Amitabh Bachchan,60,5
+84,Shang-Chi,2021,Action,7.4,PG-13,132 min,English,USA,150000000,432243292,Destin Cretton,Simu Liu,24,2
+85,Band Baaja Baaraat,2010,Romance,7.3,UA,140 min,Hindi,India,120000000,430000000,Maneesh Sharma,Ranveer Singh,72,2
+86,1917,2019,Action,8.3,R,119 min,English,UK,95000000,384541068,Sam Mendes,George MacKay,36,10
+87,Mimi,2021,Drama,7.7,UA,113 min,Hindi,India,N/A,N/A,Laxman Utekar,Kriti Sanon,24,3
+88,Soul,2020,Animation,8.1,PG,100 min,English,USA,150000000,120585333,Pete Docter,Jamie Foxx,24,2
+89,Ludo,2020,Comedy,7.4,UA,148 min,Hindi,India,N/A,N/A,Anurag Basu,Abhishek Bachchan,24,1
+90,Ford v Ferrari,2019,Action,8.1,PG-13,152 min,English,USA,97600000,225503511,James Mangold,Matt Damon,36,4
+91,Mard Ko Dard Nahi Hota,2018,Action,7.9,UA,134 min,Hindi,India,400000000,165000000,Vasan Bala,Abhimanyu Dassani,36,2
+92,Guna 369,2019,Action,6.8,A,154 min,Telugu,India,200000000,400000000,Arjun Jandyala,Karthikeya,36,0
+93,The Prestige,2006,Drama,8.5,PG-13,130 min,English,USA,40000000,109676311,Christopher Nolan,Hugh Jackman,60,2
+94,Charlie and the Chocolate Factory,2005,Fantasy,6.7,PG,115 min,English,USA,150000000,474968763,Tim Burton,Johnny Depp,N/A,1
+95,Chak De India,2007,Drama,8.2,UA,153 min,Hindi,India,200000000,740000000,Shimit Amin,Shah Rukh Khan,72,3
+96,Seven,1995,Crime,8.6,R,127 min,English,USA,33000000,327311859,David Fincher,Brad Pitt,N/A,1
+97,Manjhi: The Mountain Man,2015,Drama,8.0,UA,112 min,Hindi,India,200000000,60000000,Ketan Mehta,Nawazuddin Siddiqui,48,2
+98,Apocalypse Now,1979,Action,8.4,R,153 min,English,USA,31500000,150000000,Francis Ford Coppola,Martin Sheen,N/A,5
+99,Kai Po Che,2013,Drama,7.8,UA,123 min,Hindi,India,200000000,310000000,Abhishek Kapoor,Sushant Singh Rajput,60,3
+100,Once Upon a Time in Hollywood,2019,Drama,7.6,R,161 min,English,USA,90000000,374343626,Quentin Tarantino,Leonardo DiCaprio,36,2
